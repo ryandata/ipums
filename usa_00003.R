@@ -83,6 +83,11 @@ ggplot(data, aes(x=AGE)) + facet_wrap(YEAR) + geom_histogram()
 ggplot(data, aes(x=AGE)) + facet_wrap(YEAR) + geom_density()
 
 table(RACE)
+ipums_val_labels(RACE)
+
+data %>%
+  group_by(YEAR) %>%
+  summarise(mean = mean(RACE, na.rm=TRUE), n = n())
 
 data$RACE2<-as.factor(RACE)
 
@@ -141,7 +146,7 @@ as.data.frame(ipums_val_labels(ANCESTR1))
 # look for Russian ancestry
 data2 <-
   data %>%
-  filter(ANCESTR1== 122)
+  filter(ANCESTR1==122)
 
 attach(data2)
 table(ANCESTR1)
